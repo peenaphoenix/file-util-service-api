@@ -1,7 +1,8 @@
-const pdfRoutes = require("./pdf/routes");
+const pdfRoutes = require ('./pdf/routes');
+const imageRoutes = require ('./image/routes');
 
-const routes = [].concat(pdfRoutes);
+const routes = [].concat (pdfRoutes).concat (imageRoutes);
 
 module.exports = {
-    routes:routes,
-}
+  routes: routes,
+};
