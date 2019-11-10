@@ -30,7 +30,16 @@ let imageRoutes = [
       console.log (JSON.stringify (request.payload['type']));
       const uploadSessionDir = await fileManager.upload (request);
       let infile = request.payload['file'].hapi.filename;
-      let outfile = 'converted_' + infile.replace ('.jpg', '.png');
+
+      const pngFileTypeRegEx = new RegExp ('^.*\.(png|PNG)$');
+      const jpgFileTypeRegEx = new RegExp ('^.*\.(jpg|JPG)$');
+      let outfile = '';
+
+      if (pngFileTypeRegEx.test (infile)) {
+        outfile = 'converted_' + infile.replace ('.png', '.jpg');
+      } else if (jpgFileTypeRegEx.test (infile)) {
+        outfile = 'converted_' + infile.replace ('.jpg', '.png');
+      }
 
       await commander
         .convert ({
